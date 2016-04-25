@@ -18,11 +18,9 @@ class DB {
 		$this->MySQLi->set_charset("utf8");
 	}
 
-	/*Takes an array with MySQL login details,
-	and creates an instance of the class,
-	held in the self::$instance static variable.
-	This way we can be sure that only one connection
-	to the database can exists in the same time*/
+	/*Takes an array with MySQL login details, and creates an instance of the class,
+	held in the self::$instance static variable. This way we can be sure that only
+	one connection to the database can exists in the same time*/
 	public static function init(array $dbOptions){
 		if(self::$instance instanceof self){
 			return false;
@@ -39,7 +37,8 @@ class DB {
 		return self::$instance-->MySQLi->query($sql);
 	}
 
-	/**/
+	/*Escapes special characters in a string for use in an SQL statement,
+	in this case: htmlspecialchars — That convert special characters to HTML entities*/
 	public static function esc($str){
 		return self::$instance->MySQLi->real_escape_string(htmlspecialchars($str));
 	}

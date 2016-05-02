@@ -1,6 +1,10 @@
 /* Main chat container */
-
+* {
+	font-family: "Times New Roman", sans-serif;
+}
 #chatContainer{
+background: EEE;
+padding: 12px;
 
 }
 
@@ -211,5 +215,5 @@ p.noChats,
 }
 
 #chatErrorMessage{
-	
+
 }

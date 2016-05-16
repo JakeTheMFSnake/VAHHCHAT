@@ -3,7 +3,7 @@ set foreign_key_checks = 0;
 so we won't end up with duplicates in our database */
 
 /*drop table if exists tableName; */
-drop table if exists customers;
+drop table if exists webchat_lines;
 drop table if exists orders;
 set foreign_key_checks = 1;
 
@@ -17,11 +17,6 @@ CREATE TABLE webchat_lines (
   KEY ts (ts)
 );
 
--- --------------------------------------------------------
-
---
--- Table structure for table `webchat_users`
---
 
 CREATE TABLE webchat_users (
   id int(10) unsigned NOT NULL auto_increment,

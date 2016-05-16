@@ -1,15 +1,18 @@
 <?php
   class chat {
 
+    /*Loggs in the user with it's name and email*/
     public static function login($name, $email){
       if(!$name || $email){
         throw new Exception('Fill in all the required fields plox! <3');
       }
+      //Checkes if the email is a valid email, basiclly if '@' exists in it.
       if(!filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL)){
         throw new Exception('Dude, that aint be no email yo!');
       }
       // Preparing the gravatar hash:
       $gravatar = md5(strtolower(trim($email)));
+      //Creates the user.
       $user = new ChatUser(array(
         'name'  => $name,
         'gravatar'  => $gravatar
@@ -19,19 +22,19 @@
       if($user->save()->affected_rows != 1){
         throw new Exception('The choosen swag-tag is already in use!');
       }
-
+      //Loggs the session.
       $_SESSION['user'] = array(
         'name'  => $name,
         'gravatar'  =>$gravatar
       );
-
+      // If we've made it this far, everything checks out.
       return array(
         'status'  => 1,
         'name'  => $name,
         'gravatar'  => Chat::gravatarFromHash($gravatar)
       );
 
-      /**/
+      /*Checkes if the user with name is logged*/
       public static function checkLogged(){
         $response = array('logged' => false);
 
@@ -58,12 +61,15 @@
 
       /*Submits a chat message*/
       public static function submitChat($chatText){
+        //Checks if the user is logged in.
         if(!$_SESSION['user']){
           throw new Exception('You are not logged in my friend');
         }
+        //Checks so there is a message to send.
         if(!$chatText){
           throw new Exception('No message was entered my friend');
         }
+        //Creates the chat to be sent with appropriate information.
         $chat = new ChatLine(array(
           'author' => $_SESSION['user']['name'],
           'gravatar' => $_SESSION['user']['gravatar'],
@@ -104,7 +110,7 @@
         );
       }
 
-      /**/
+      /*Gets the latest chat messages within the interval*/
       public static function getChats($lastID){
         $lastID = (int)$lastID;
 
@@ -131,8 +137,6 @@
         return 'http://www.gravatar.com/avatar/'.$hash.'?size='.$size.'&default='.
                 urlencode('http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?size='.$size);
       }
-
-
     }
   }
 ?>

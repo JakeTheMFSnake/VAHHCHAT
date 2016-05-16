@@ -3,7 +3,7 @@
 
     /*Loggs in the user with it's name and email*/
     public static function login($name, $email){
-      if(!$name || $email){
+      if(!$name || !$email){
         throw new Exception('Fill in all the required fields plox! <3');
       }
       //Checkes if the email is a valid email, basiclly if '@' exists in it.

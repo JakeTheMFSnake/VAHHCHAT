@@ -3,6 +3,14 @@
 jQuery front end and outputs JSON formatted data.*/
 /* JSON == JavaScript Object Notaion*/
 
+/*Variables needed to connect to the database */
+$dbOptions = array(
+  'db_host' => 'jakobhakansson.se.mysql',
+  'db_user' => 'jakobhakansson_se',
+	'db_pass' => 'owSZyxEK',
+	'db_name' => 'jakobhakansson_se'
+);
+
 error_reporting(E_ALL ^ E_NOTICE);
 
 /*Getting files needed/ require: */

@@ -5,13 +5,16 @@ array with parameters, and saves only the ones that are defined
 in the class.*/
 class ChatBase{
 
-  // This constructor is used by all the chat classes:
-  public function __construct(array $options){
-    foreach ($option as $key => $value) {
-      if(isset($this->$key)){
-        $this->$key = $value;
-      }
-    }
-  }
+	// This constructor is used by all the chat classes:
+
+	public function __construct(array $options){
+
+		foreach($options as $k=>$v){
+			if(isset($this->$k)){
+				$this->$k = $v;
+			}
+		}
+	}
 }
- ?>
+
+?>

@@ -344,11 +344,11 @@ var chat = {
 // Custom GET & POST wrappers:
 
 $.tzPOST = function(action,data,callback){
-	$.post('php/ajax.php?action='+action,data,callback,'json');
+	$.post('php/vahhchat.php?action='+action,data,callback,'json');
 }
 
 $.tzGET = function(action,data,callback){
-	$.get('php/ajax.php?action='+action,data,callback,'json');
+	$.get('php/vahhchat.php?action='+action,data,callback,'json');
 }
 
 // A custom jQuery method for placeholder text:

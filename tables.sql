@@ -1,29 +1,28 @@
-set foreign_key_checks = 0;
 /* Here we'll remove tables if they exists,
 so we won't end up with duplicates in our database */
 
 /*drop table if exists tableName; */
 drop table if exists webchat_lines;
 drop table if exists orders;
-set foreign_key_checks = 1;
-
-CREATE TABLE webchat_lines (
-  id int(10) unsigned NOT NULL auto_increment,
-  author varchar(16) NOT NULL,
-  gravatar varchar(32) NOT NULL,
-  text varchar(255) NOT NULL,
-  ts timestamp NOT NULL default CURRENT_TIMESTAMP,
-  PRIMARY KEY  (id),
-  KEY ts (ts)
-);
 
 
-CREATE TABLE webchat_users (
-  id int(10) unsigned NOT NULL auto_increment,
-  name varchar(16) NOT NULL,
-  gravatar varchar(32) NOT NULL,
-  last_activity timestamp NOT NULL default CURRENT_TIMESTAMP,
-  PRIMARY KEY  (id),
-  UNIQUE KEY name (name),
-  KEY last_activity (last_activity)
-);
+CREATE TABLE `webchat_lines` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `author` varchar(16) NOT NULL,
+  `gravatar` varchar(32) NOT NULL,
+  `text` varchar(255) NOT NULL,
+  `ts` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`id`),
+  KEY `ts` (`ts`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `webchat_users` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `name` varchar(16) NOT NULL,
+  `gravatar` varchar(32) NOT NULL,
+  `last_activity` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `name` (`name`),
+  KEY `last_activity` (`last_activity`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;

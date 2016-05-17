@@ -2,7 +2,7 @@
 
 class ChatUser extends ChatBase{
 
-	protected $name = '', $gravatar = '';
+	protected $name = '';
 	/* A save method, which the object to our database.
     As it returns the MySQLi object, contained in the DB class,
     you can check whether the save was successful by checking
@@ -10,11 +10,9 @@ class ChatUser extends ChatBase{
 	public function save(){
 
 		DB::query("
-			INSERT INTO webchat_users (name, gravatar)
+			INSERT INTO webchat_users (name)
 			VALUES (
-				'".DB::esc($this->name)."',
-				'".DB::esc($this->gravatar)."'
-		)");
+				'".DB::esc($this->name)."')");
 
 		return DB::getMySQLiObject();
 	}
@@ -23,10 +21,9 @@ class ChatUser extends ChatBase{
     is displayed as online in the users section.*/
 	public function update(){
 		DB::query("
-			INSERT INTO webchat_users (name, gravatar)
+			INSERT INTO webchat_users (name)
 			VALUES (
-				'".DB::esc($this->name)."',
-				'".DB::esc($this->gravatar)."'
+				'".DB::esc($this->name)."'
 			) ON DUPLICATE KEY UPDATE last_activity = NOW()");
 	}
 }

@@ -52,7 +52,7 @@ try{
 	switch($_GET['action']){
 
 		case 'login':
-			$response = Chat::login($_POST['name'],$_POST['email']);
+			$response = Chat::login($_POST['name']);
 		break;
 		//Calls for the static method checkLogged in the Chat class.
 		case 'checkLogged':

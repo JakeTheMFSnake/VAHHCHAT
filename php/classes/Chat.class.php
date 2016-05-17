@@ -3,22 +3,17 @@
 /* The Chat class exploses public static methods, used by ajax.php */
 
 class Chat{
-	/*Loggs in the user with it's name and email*/
-	public static function login($name,$email){
-		if(!$name || !$email){
+	/*Loggs in the user with it's name*/
+	public static function login($name){
+		if(!$name){
 			throw new Exception('Fill in all the required fields plox! <3');
 		}
-		//Checkes if the email is a valid email, basiclly if '@' exists in it.
-		if(!filter_input(INPUT_POST,'email',FILTER_VALIDATE_EMAIL)){
-			throw new Exception('Dude, that aint be no email yo!');
-		}
 
-		// Preparing the gravatar hash:
-		$gravatar = md5(strtolower(trim($email)));
+
+
 
 		$user = new ChatUser(array(
-			'name'		=> $name,
-			'gravatar'	=> $gravatar
+			'name'		=> $name
 		));
 
 		// The save method returns a MySQLi object
@@ -27,14 +22,12 @@ class Chat{
 		}
 		//Loggs the session.
 		$_SESSION['user']	= array(
-			'name'		=> $name,
-			'gravatar'	=> $gravatar
+			'name'		=> $name
 		);
 		// If we've made it this far, everything checks out.
 		return array(
 			'status'	=> 1,
-			'name'		=> $name,
-			'gravatar'	=> Chat::gravatarFromHash($gravatar)
+			'name'		=> $name
 		);
 	}
 	/*Checkes if the user with name is logged*/
@@ -44,8 +37,7 @@ class Chat{
 		if($_SESSION['user']['name']){
 			$response['logged'] = true;
 			$response['loggedAs'] = array(
-				'name'		=> $_SESSION['user']['name'],
-				'gravatar'	=> Chat::gravatarFromHash($_SESSION['user']['gravatar'])
+				'name'		=> $_SESSION['user']['name']
 			);
 		}
 
@@ -68,12 +60,12 @@ class Chat{
 		}
 		//Checks so there is a message to send.
 		if(!$chatText){
-			throw new Exception('You haven\' entered a chat message.');
+			throw new Exception('You haven\'t entered a chat message.');
 		}
 		//Creates the chat to be sent with appropriate information.
 		$chat = new ChatLine(array(
 			'author'	=> $_SESSION['user']['name'],
-			'gravatar'	=> $_SESSION['user']['gravatar'],
+
 			'text'		=> $chatText
 		));
 
@@ -101,8 +93,9 @@ class Chat{
 		$result = DB::query('SELECT * FROM webchat_users ORDER BY name ASC LIMIT 18');
 
 		$users = array();
+		//Here we might get some problems ====
 		while($user = $result->fetch_object()){
-			$user->gravatar = Chat::gravatarFromHash($user->gravatar,30);
+
 			$users[] = $user;
 		}
 
@@ -128,18 +121,14 @@ class Chat{
 				'minutes'	=> gmdate('i',strtotime($chat->ts))
 			);
 
-			$chat->gravatar = Chat::gravatarFromHash($chat->gravatar);
+
 
 			$chats[] = $chat;
 		}
 
 		return array('chats' => $chats);
 	}
-	/*Plugin-in from gravatar.com to be able to use your gravatar*/
-	public static function gravatarFromHash($hash, $size=23){
-		return 'http://www.gravatar.com/avatar/'.$hash.'?size='.$size.'&amp;default='.
-				urlencode('http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?size='.$size);
-	}
+
 }
 
 

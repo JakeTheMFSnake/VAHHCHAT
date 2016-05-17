@@ -4,10 +4,10 @@
 }
 
 body{
-	color:#eee;
-	background:url('../img/page_bg.jpg') repeat-x #323232;
+	color:##ff33ff;
+	background-color: #8cff90;
 	font:15px Calibri,Arial,sans-serif;
-	border-top:5px solid #212121;
+	border-top:5px solid #0f4d11;
 }
 
 #footer{
@@ -19,31 +19,7 @@ body{
 	left:0;
 }
 
-a.tzine,a.tzine:visited{
-	background:url("../img/tzine.png") no-repeat right top;
-	border:none;
-	color:#FCFCFC;
-	font-size:12px;
-	height:70px;
-	left:50%;
-	line-height:31px;
-	margin:23px 0 0 110px;
-	position:absolute;
-	top:0;
-	width:290px;
-}
 
-.tri{
-	border-color:transparent transparent #212121;
-	border-style:solid;
-	border-width:20px 17px;
-	height:0;
-	left:50%;
-	margin:-40px 0 0 -400px;
-	position:absolute;
-	top:0;
-	width:0;
-}
 
 h1{
 	font-size:20px;

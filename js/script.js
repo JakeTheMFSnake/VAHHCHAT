@@ -305,7 +305,7 @@ var chat = {
 				message = 'No one is online';
 			}
 			else {
-				message = r.total+' '+(r.total == 1 ? 'person':'people')+' online';
+				message = r.total+' '+(r.total == 1 ? 'person is':'people are')+' online';
 			}
 
 			users.push('<p class="count">'+message+'</p>');

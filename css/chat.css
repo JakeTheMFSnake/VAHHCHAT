@@ -1,9 +1,20 @@
 /* Main chat container */
+* {
+	font-family: "Times New Roman", sans-serif;
+}
+body 			{ font-family:"Times New Roman",sans-serif;
+           background-image: url('../img/background.jpg');
+					 color: white;
+  }
+h1	{
+		color: white;
+	}
 
 #chatContainer{
 	width:610px;
 	margin:100px auto;
 	position:relative;
+
 }
 
 
@@ -59,13 +70,13 @@
 }
 
 .chat span{
-	color:#777777;
+	color:#EEE;
 	text-shadow:1px 1px 0 #FFFFFF;
 	font-size:14px;
 }
 
 .chat .text{
-	color:#444444;
+	color:#EEEE;
 	display:inline-block;
 	font-size:15px;
 	overflow:hidden;
@@ -251,6 +262,7 @@ p.noChats,
 }
 
 #chatErrorMessage{
+
 	width:100%;
 	top:0;
 	left:0;
@@ -264,3 +276,16 @@ p.noChats,
 
 	text-shadow:1px 1px 0 #940f0f;
 }
+<<<<<<< HEAD
+=======
+
+#footer{
+	text-align: right;
+  width:90%;
+	height:50px;
+	position:absolute;
+	bottom:0;
+	left:0;
+  padding:20px;
+}
+>>>>>>> origin/master

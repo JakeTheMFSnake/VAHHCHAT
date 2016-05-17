@@ -1,26 +1,9 @@
 /* Main chat container */
-* {
-	font-family: "Times New Roman", sans-serif;
-}
-body 			{ font-family:"Times New Roman",sans-serif;
-           background-image: url('../img/background.jpg');
-					 color: white;
-  }
-h1	{
-		color: white;
-	}
 
 #chatContainer{
-<<<<<<< HEAD
 	width:610px;
-=======
-background-color: #EEEE;
-padding: 12px;
-	width:510px;
->>>>>>> 0c4682fdfce70ee0c2a2edb9f65e251a0f359486
 	margin:100px auto;
 	position:relative;
-
 }
 
 
@@ -62,8 +45,6 @@ padding: 12px;
 
 .chat{
 	background-color: #CACACA;
-	/*background:url('../css/background.jpg');*/
-
 	min-height:24px;
 	padding:6px;
 	border:1px solid #FFFFFF;
@@ -78,13 +59,13 @@ padding: 12px;
 }
 
 .chat span{
-	color:#EEE;
+	color:#777777;
 	text-shadow:1px 1px 0 #FFFFFF;
 	font-size:14px;
 }
 
 .chat .text{
-	color:#EEEE;
+	color:#444444;
 	display:inline-block;
 	font-size:15px;
 	overflow:hidden;
@@ -270,7 +251,6 @@ p.noChats,
 }
 
 #chatErrorMessage{
-
 	width:100%;
 	top:0;
 	left:0;
@@ -283,15 +263,4 @@ p.noChats,
 	color:#fff;
 
 	text-shadow:1px 1px 0 #940f0f;
-}
-
-
-#footer{
-	text-align: right;
-  width:90%;
-	height:50px;
-	position:absolute;
-	bottom:0;
-	left:0;
-  padding:20px;
 }

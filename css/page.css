@@ -1,16 +1,17 @@
 *{
 	margin:0;
-	padding:0;
+	padding:10px;
 }
 
 body{
 	color:##ff33ff;
 	background-color: #8cff90;
-	font:15px Calibri,Arial,sans-serif;
+	font:15px Tilltium,Arial,sans-serif;
 	border-top:5px solid #0f4d11;
 }
 
 #footer{
+
 	background-color:#212121;
 	position:fixed;
 	width:100%;

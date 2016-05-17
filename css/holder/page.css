@@ -20,7 +20,7 @@ body{
 }
 
 a.tzine,a.tzine:visited{
-	background:url("../img/tzine.png") no-repeat right top;
+	background:url("../img/background.jpg) no-repeat right top;
 	border:none;
 	color:#FCFCFC;
 	font-size:12px;

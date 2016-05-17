@@ -1,19 +1,41 @@
 /* CSS Document */
 
-*				{margin:0px; padding:0px; border:0px; }
+*			{margin:0px; padding:0px; border:0px;
+       font-family: "Times New Roman", sans-serif;
+       color:#EEE;
 
-body 			{ font-family:Arial; }
+    }
 
-#wrapper 		{ width:900px; margin:0px auto; padding:30px;  }
+body 			{ font-family:"Times New Roman",sans-serif;
+           background-image: url('../css/background.jpg');
+  }
+
+#wrapper 		{ width:720; margin:20px auto; padding:30px;}
 
 #name 			{ width:150px; float:left; margin-bottom:30px;	}
 
 #topnav 		{ width:700px; float:right; margin-bottom:50px; margin-right:30px;	}
-#topnav ul 		{ text-align:right; 		}
+#topnav ul 		{ text-align:right;}
 #topnav ul li 	{ display:inline; margin-left:5px; }
 #topnav a 		{ font-size:15px; font-weight:bold; text-decoration:none; }
 #topnav a:link 	{ color:#000; }
 #topnav a:hover	{ color:#777; }
 
-#content 		{ width:900px; float:left;	}
-#content h1 	{ font-size:32px; margin: 0 0 15px 0;}
+#content 		{ width:100%; align-items: center;
+	padding-bottom:50px;}
+#content h1 { font-size:42px; margin: 0 0 15px 0;}
+h3{
+  font-size: 32px; margin: 10px;
+}
+.p{
+  padding: 20px
+}
+#footer {
+  text-align: right;
+  width:90%;
+	height:50px;
+	position:absolute;
+	bottom:0;
+	left:0;
+  padding:20px;
+}

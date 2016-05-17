@@ -20,7 +20,7 @@ var chat = {
 
 		// Using the defaultText jQuery plugin, included at the bottom:
 		$('#name').defaultText('Nickname');
-		$('#email').defaultText('Email (Gravatars are Enabled)');
+
 
 		// Converting the #chatLineHolder div into a jScrollPane,
 		// and saving the plugin's API in chat.data:
@@ -51,7 +51,7 @@ var chat = {
 				if(r.error){
 					chat.displayError(r.error);
 				}
-				else chat.login(r.name,r.gravatar);
+				else chat.login(r.name);
 			});
 
 			return false;
@@ -75,7 +75,7 @@ var chat = {
 				params = {
 					id			: tempID,
 					author		: chat.data.name,
-					gravatar	: chat.data.gravatar,
+
 					text		: text.replace(/</g,'&lt;').replace(/>/g,'&gt;')
 				};
 
@@ -122,7 +122,7 @@ var chat = {
 
 		$.tzGET('checkLogged',function(r){
 			if(r.logged){
-				chat.login(r.loggedAs.name,r.loggedAs.gravatar);
+				chat.login(r.loggedAs.name);
 			}
 		});
 
@@ -141,10 +141,9 @@ var chat = {
 	// The login method hides displays the
 	// user's login data and shows the submit form
 
-	login : function(name,gravatar){
+	login : function(name){
 
 		chat.data.name = name;
-		chat.data.gravatar = gravatar;
 		$('#chatTopBar').html(chat.render('loginTopBar',chat.data));
 
 		$('#loginForm').fadeOut(function(){
@@ -163,22 +162,20 @@ var chat = {
 		switch(template){
 			case 'loginTopBar':
 				arr = [
-				'<span><img src="',params.gravatar,'" width="23" height="23" />',
+				'<span><img src="../img/avatar.png" width="24" height="24" />',
 				'<span class="name">',params.name,
 				'</span><a href="" class="logoutButton rounded">Logout</a></span>'];
 			break;
 
 			case 'chatLine':
 				arr = [
-					'<div class="chat chat-',params.id,' rounded"><span class="gravatar"><img src="',params.gravatar,
-					'" width="23" height="23" onload="this.style.visibility=\'visible\'" />','</span><span class="author">',params.author,
+					'<div class="chat chat-',params.id,' rounded"><span class="avatar"><img src="../img/avatar.png" width="23" height="23" onload="this.style.visibility=\'visible\'" />','</span><span class="author">',params.author,
 					':</span><span class="text">',params.text,'</span><span class="time">',params.time,'</span></div>'];
 			break;
 
 			case 'user':
 				arr = [
-					'<div class="user" title="',params.name,'"><img src="',
-					params.gravatar,'" width="30" height="30" onload="this.style.visibility=\'visible\'" /></div>'
+					'<div class="user" title="',params.name,'"><img src="../img/avatar.png" width="30" height="30" onload="this.style.visibility=\'visible\'" /></div>'
 				];
 			break;
 		}
@@ -344,11 +341,11 @@ var chat = {
 // Custom GET & POST wrappers:
 
 $.tzPOST = function(action,data,callback){
-	$.post('php/ajax.php?action='+action,data,callback,'json');
+	$.post('php/vahhchat.php?action='+action,data,callback,'json');
 }
 
 $.tzGET = function(action,data,callback){
-	$.get('php/ajax.php?action='+action,data,callback,'json');
+	$.get('php/vahhchat.php?action='+action,data,callback,'json');
 }
 
 // A custom jQuery method for placeholder text:

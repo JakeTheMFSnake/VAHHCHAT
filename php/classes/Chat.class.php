@@ -1,6 +1,6 @@
 <?php
 
-/* The Chat class exploses public static methods, used by ajax.php */
+/* The Chat class exploses public static methods, used by vahhchat.php */
 
 class Chat{
 	/*Loggs in the user with it's name*/
@@ -8,14 +8,9 @@ class Chat{
 		if(!$name){
 			throw new Exception('Fill in all the required fields plox! <3');
 		}
-
-
-
-
 		$user = new ChatUser(array(
 			'name'		=> $name
 		));
-
 		// The save method returns a MySQLi object
 		if($user->save()->affected_rows != 1){
 			throw new Exception('This nick is in use.');
@@ -91,11 +86,10 @@ class Chat{
 		DB::query("DELETE FROM webchat_users WHERE last_activity < SUBTIME(NOW(),'0:0:30')");
 
 		$result = DB::query('SELECT * FROM webchat_users ORDER BY name ASC LIMIT 18');
-
 		$users = array();
+
 		//Here we might get some problems ====
 		while($user = $result->fetch_object()){
-
 			$users[] = $user;
 		}
 
@@ -107,10 +101,9 @@ class Chat{
 	/*Gets the latest chat messages within the interval*/
 	public static function getChats($lastID){
 		$lastID = (int)$lastID;
-
 		$result = DB::query('SELECT * FROM webchat_lines WHERE id > '.$lastID.' ORDER BY id ASC');
-
 		$chats = array();
+
 		while($chat = $result->fetch_object()){
 			/*gmdate function to output a GMT time. In the frontend,
       we use the hour and minute values to feed the JavaScript
@@ -120,16 +113,10 @@ class Chat{
 				'hours'		=> gmdate('H',strtotime($chat->ts)),
 				'minutes'	=> gmdate('i',strtotime($chat->ts))
 			);
-
-
-
 			$chats[] = $chat;
 		}
 
 		return array('chats' => $chats);
 	}
-
 }
-
-
 ?>

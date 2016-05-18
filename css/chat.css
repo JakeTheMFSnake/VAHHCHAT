@@ -11,14 +11,15 @@
 
 
 #chatTopBar{
-	height:40px;
-	background-color:#2c9a42;
-	border:2px solid #0f4d11;
+	height:100px;
+	background:url('../img/topBar.png') no-repeat;
+	/*background-color:#2c9a42;*/
+	/*border:2px solid #0f4d11;*/
 	margin-bottom:15px;
 	position:relative;
-
-	color:#777;
-	text-shadow:1px 1px 0 #cccccc;
+    font-size: 20px;
+	color:#2956a9;
+	text-shadow:1px 1px 0 #84a7e7;
 }
 
 #chatTopBar .name{
@@ -43,6 +44,7 @@
 	margin-bottom:20px;
 }
 
+/*The text bubble*/
 .chat{
 	background-color: #CACACA;
 	min-height:24px;
@@ -64,6 +66,7 @@
 	font-size:14px;
 }
 
+/*The text in the message*/
 .chat .text{
 	color:#444444;
 	display:inline-block;
@@ -81,12 +84,14 @@
 
 .chat .time{
 	position:absolute;
+	color: #84a7e7;
 	right:10px;
 	top:12px;
 	font-size:11px;
 }
 
 .chat .author{
+    color: #84a7e7;
 	margin-right:6px;
 	font-size:11px;
 }
@@ -96,12 +101,12 @@
 
 
 #chatUsers{
-	background-color:#2c9a42;
-	border:1px solid #0f4d11;
-	height:75%;
+	background-color:#bbcef1;
+	border:2px solid #84a7e7;
+	height:70%;
 	position:absolute;
 	right:0;
-	top:56px;
+	top:116px;
 	width:150px;
 }
 
@@ -117,30 +122,31 @@
 
 
 #chatBottomBar{
-	background-color: #E5E5E5;
+	/*background-color: #E5E5E5;*/
 	position:relative;
 	padding:10px;
-	border:1px solid #fff;
+	/*border:1px solid #fff;*/
 }
 
 #chatBottomBar .tip{
 	position:absolute;
 	width:0;
 	height:0;
-	border:10px solid transparent;
-	border-bottom-color:#eeeeee;
+	/*border:10px solid transparent;*/
+	/*border-bottom-color:#eeeeee;*/
 	top:-20px;
 	left:20px;
 }
 
 #chatContainer input{
-	background-color: #cacaca;
+	/*background-color: #cacaca;*/
+	background:url('../img/writingBar.png') no-repeat;
 	height:36px;
 	font:15px/28px Trillium,Arial,sans-serif;
 	color:#777;
-	border:1px solid;
-	border-color:#c1c1c1 #eee #eee #c1c1c1;
-	text-shadow:1px 1px 0 #E4E4E4;
+	/*border:1px solid;*/
+	/*border-color:#c1c1c1 #eee #eee #c1c1c1;*/
+	/*text-shadow:1px 1px 0 #E4E4E4;*/
 	padding:0 5px;
 	margin-right:5px;
 	width:485px;
@@ -190,7 +196,7 @@ input#chatText{
 
 
 a.logoutButton{
-	background-color:#bbb;
+	background-color:#df9f9f;
 	border:1px solid #eee !important;
 	color:#FFFFFF !important;
 	font-size:14px;

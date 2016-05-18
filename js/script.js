@@ -162,7 +162,7 @@ var chat = {
 		switch(template){
 			case 'loginTopBar':
 				arr = [
-				'<span><img src="img/avatar.png" width="24" height="24" />',
+				'<span><img src="img/avatar.png" width="30" height="30" />',
 				'<span class="name">',params.name,
 				'</span><a href="" class="logoutButton rounded">Logout</a></span>'];
 			break;
@@ -175,7 +175,7 @@ var chat = {
 
 			case 'user':
 				arr = [
-					'<div class="user" title="',params.name,'"><img src="img/avatar.png" width="30" height="30" onload="this.style.visibility=\'visible\'" /></div>'
+					'<div class="user" title="',params.name,'"><img src="img/people.png" width="30" height="30" onload="this.style.visibility=\'visible\'" /></div>'
 				];
 			break;
 		}

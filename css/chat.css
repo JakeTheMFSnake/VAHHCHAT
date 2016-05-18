@@ -118,6 +118,7 @@
 }
 
 
+
 /* Bottom Bar */
 
 
@@ -243,7 +244,7 @@ p.noChats,
 	font-size:14px;
 	padding:10px;
 	text-align:center;
-	text-shadow:1px 1px 0 #111111;
+
 }
 
 #chatUsers .count{

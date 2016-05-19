@@ -27,14 +27,65 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 
  <div id="Content">
 	 <h1>Introdution</h1>
-	 <p>In the course Network Programming,EDA095, one of the course requirements is to complete a project with the base in network programming.
+	 <p>In the course Network Programming,EDA095, one of the course requirements is to complete a project with the base in network programming.</p>
+     <h1>Background</h1>
+     <p> The project was begun as part of the course in Network Programming EDA095. It's purpose is for the students to gather and use the knowledge involving network programming using different methods at our disposal. During this project we've encountered different techniques such as PHP, AJAX, MySQL and for website tools HTML, CSS and JavaScript.</p>
 		 <h1>Requirements</h1>
+      <p>The chat-system is divided into two parts:</p>
+      <p>The Client, which will interact with the front-end which is showed through CSS and HTML. Functions are implemented in PHP and JavaScript.</p>
+      <p>The Server, which will communicate with the client through PHP and AJAX. The server itself is based on PHP, AJAX and MySQL.</p>
+     <p> Development shall be version controlled using GIT.
 		 <h2>Development Requirements</h2>
 		 <h2>Quality Requirements</h2>
+     <p>Performance:</p>
+     <p>The system shall be sufficiently user-friendly and intuitive so that an LTH-student shall be able to use and explain the functionality within the system.
+\item The system shall allow people to choose nicknames so the messages can be separated.
+\item The system shall allow people to leave the chat room through a logout button (To change Nickname etc).</p>
+      <p> The system shall show author, avatar and time-stamps for each message.</p>
+      <p> The system shall show how many users that currently are online.<p>
+        <p> The system shall allow up to 20 people simultaneously using it.<p>
 		 <h2>Functional Requirements</h2>
-		 <h1>Usability</h1>
-		 <h1>Usability</h1>
+     <p>Scenario: Open VAHH-chat</p>
+     <p>- User opens the VAHH-chat with a URL</p>
+     <p>Pre-conditions: the URL is opened in a up to date web-reader with JavaScript enabled.</p>
+     <p>Post-condition: the VAHH-chat is shown, with messages from the current session and showing users logged in to the chat</p>
+     <p>Scenario: Login.</p>
+     <p>- User logs in by picking a nickname</p>
+     <p>Pre-condition: User is in VAHH-Chat tab.</p>
+     <p>Post-condition: User is logged in, all messages and users from previous sessions are shown.</p>
+     <p>Scenario: Send message.</p>
+     <p>- User sends a message by writing the message in the text field and clicking on the "Submit"-button.</p>
+     <p>Pre-condition: User has chosen a nickname and has logged in to the system.</p>
+     <p>Post-condition: The message that were chosen is sent and shown in the chat for the user and all others to see.</p>
+     <p>Scenario: Receive message.</p>
+     <p>- User has the chat open with a chosen nickname/logged in and another user sends a message that is shown in the chat.</p>
+     <p>Pre-condition: User has the chat open with a chosen nickname/logged in.</p>
+     <p>Post-condition: The message is shown in the chat.</p>
+     <p>Scenario: Logout.</p>
+     <p>- User clicks on the "Logout"-button and thus logging him/her out of her system.</p>
+     <p>Pre-condition: User is logged in to the system. </p>
+    <p>Post-condition: User logs out and leaves the nickname earlier chosen free for anyone else to pick.</p>
+		 <h1>Model of the system</h1>
+     <p>The system has been implemented through a web-interface, thus we've been working with HTML, CSS, JavaScript, PHP, AJAX and jQuery.</p>
+      <p>HTML is to lay down the structure of the website. Our documents is structured as HTML5 for convenience, as this will allow us to use the new, shorter doctype and skip the type attribute on the script tags. The two main documents is which contains the chat itself. And index.html which is used to introduce the project and system.</p>
+      <p>CSS is to make the appearance more user friendly and visually better. We have three documents for this: chat.css which is for the chat itself,page.css which is for the page and styles.css which is for our index.</p>
+      <p>SQL is used since we're working with a database. We're using two tables:webchat\_users and webchat\_users holds the attributes ID, name and last\_activity. The ID is to easier search and get users. The name field is defined as unique so that no other user can have the same nickname as another. last\_activity holds a timestamp, which is updated every 15 seconds for every user. It is also defined as an index, so we can faster delete inactive users.
+webchat\_lines holds the attrubuts ID, author, text, ts. The ID is for the same purpose as webchat\_users, to easier search and get lines. Author is to store the names of the users that sent the line/message. Text is the message itself and ts is a timestamp so we can delete older messages, just like inactive users.
+The code to create the table is executed in out database, but can also be found in tables.sql</p>
+      <p>PHP is used operate all methods that is being used. We have vahhchat.php that holds a simple switch statement to define the actions which are supported by the script. Here functions as login, logout and actions for requesting a list of chats and online users.
+All outputs is in the form of JSON messages and errors are raised from exceptions. The switch statement will route the requests to static methods in the Chat.class.php.ChatBase.class.php has the purpose as a bse which is used both by ChatLine and ChatUser. It's main purpose is to define the constructor, which takes an array with parameters and saved only the ones that are defined in the class.ChatLine.class.php extends ChatBase and is used for chat entries. ChatBase.class.php extends ChatBase as well and has two methods/functions that saves, which  returns the MySQLi object, contained in the DB class, you can check whether the save was successful by checking the affected\_rows property. And the method/function update, which updates the last\_activity timestamp to the current time. This shows that this person keeps a chat window open and is displayed as online in the users section.
+DB.class.php is our database manager which basically handles our SQL-communication between the database and web-browser. </p>
+<p>JavaScript is used so the chat will listen for events on the login and submit forms (as well as the logout button). There are also scheduled AJAX requests back to the server for checking for new chat-messages and users.
+script.js we have all the functionality that makes the chat "live". The script will have listeners that will wait for certain events to occur (such as on the login and submit forms).  </p>
+<p></p>
+      <h1> Usability</h1>
+      <p>  The project group decided to set the knowledge level to be such that an university student can easily use and master the chat-room without encountering any difficulties. Information about the system will always be shown so that an user can see how many people are using the system at any given time and other information that is listed in our quality requirements. The group decided that a simple login using just a nickname was all the information that an user would need to use the system. All of the chat code is organized in a single object called chat. It consists of a number of useful methods for the chat-system to work.</p>
 		 <h1>Evaluation</h1>
+     The project succeeded in fulfilling all of the requirements. If we had more time we would have added some more functionality added more functionality to the chat-system. We used an iterative process where we had a basic idea with a few requirements to carefully expanding it with more functionality and adding more requirements. In the project we had assigned roles to each member and had set up weekly meetings where we could brief each other on our progress and what difficulties we've encountered since our last meeting. We took this time to help each other by providing assistance or to help in any other way.
+
+It was a nice and fun project which makes all the Java courses go full circle and rounds off the basic level of Java programming. It was the last piece in the puzzle. The one thing in the project that could've been improved upon is to maybe set up a bi-weekly appointment with the supervisor instead of having them during the lab.
+
+What we've learned concerning coding in JavaScript in PHP is that instead of using AJAX for all our requests every third second, we could've used websockets instead. Thus eliminating the need to send anything from the client, and instead just letting the script at the backend listen after new events.
 		 <h1>User's Manual</h1>
-		 <h1>References</h1>
+    <p> Login to VAHH-chat website:http://vahhchat.jakobhakansson.se/vahhchat.html and find your way to the link to the chat-room. When you've been directed to the chat-system you are required to put in an nickname and click the login button. Now you should be ready to use VAHH-chat. The functions included in the system is to send and receive messages which you are now ready to do.</p>
 </html>

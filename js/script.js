@@ -1,5 +1,11 @@
-(function(window,$) {
-$(document).ready(function(){
+/*||====================================================||====================================================||
+Script.js is used so the chat will listen for events on the login and submit forms (as well as the logout button).
+There are also scheduled AJAX requests back to the server for checking for new chat-messages and users.
+  ||====================================================||====================================================||
+In script.js we have all the functionality that makes the chat "live". The script will have listeners that
+will wait for certain events to occur (such as on the login and submit forms).
+  ||====================================================||====================================================||*/
+(function(window,$) {$(document).ready(function(){
 
 	// Run the init method on document ready:
 	chat.init();
@@ -8,44 +14,37 @@ $(document).ready(function(){
 
 var chat = {
 
-	// data holds variables for use in the class:
-
+	/*data will hold variables that are in use in the class*/
 	data : {
 		lastID 		: 0,
 		noActivity	: 0
 	},
 
-	// Init binds event listeners and sets up timers:
-
+	/*Init binds event listeners and sets up timers:*/
 	init : function(){
 
-		// Using the defaultText jQuery plugin, included at the bottom:
+		/*Using the defaultText jQuery plugin, included at the bottom:*/
 		$('#name').defaultText('Nickname');
 
 
-		// Converting the #chatLineHolder div into a jScrollPane,
-		// and saving the plugin's API in chat.data:
-
+		/*Converting the #chatLineHolder div into a jScrollPane,
+		and saving the plugin's API in chat.data:*/
 		chat.data.jspAPI = $('#chatLineHolder').jScrollPane({
 			verticalDragMinHeight: 12,
 			verticalDragMaxHeight: 12
 		}).data('jsp');
 
-		// We use the working variable to prevent
-		// multiple form submissions:
-
+		/*We'll use the working variable to prevent
+		multiple form submissions:*/
 		var working = false;
 
-		// Logging a person in the chat:
-
+		/*Logging a person in the chat:*/
 		$('#loginForm').submit(function(){
-
 			if(working) return false;
 			working = true;
 
-			// Using our tzPOST wrapper function
-			// (defined in the bottom):
-
+			/*Using our tzPOST wrapper function
+			(defined in the bottom):*/
 			tzPOST('login',$(this).serialize(),function(r){
 				working = false;
 
@@ -58,10 +57,8 @@ var chat = {
 			return false;
 		});
 
-		// Submitting a new chat entry:
-
+		/*Submitting a new chat entry:*/
 		$('#submitForm').submit(function(){
-
 			var text = $('#chatText').val();
 
 			if(text.length == 0){
@@ -71,30 +68,25 @@ var chat = {
 			if(working) return false;
 			working = true;
 
-			// Assigning a temporary ID to the chat:
+			/*Assigning a temporary ID to the chat:*/
 			var tempID = 't'+Math.round(Math.random()*1000000),
 				params = {
 					id			: tempID,
 					author		: chat.data.name,
-
 					text		: text.replace(/</g,'&lt;').replace(/>/g,'&gt;')
 				};
 
-			// Using our addChatLine method to add the chat
-			// to the screen immediately, without waiting for
-			// the AJAX request to complete:
-
+			/*Using our addChatLine method to add the chat
+			to the screen immediately, without waiting for
+			the AJAX request to complete:*/
 			chat.addChatLine($.extend({},params));
 
-			// Using our tzPOST wrapper method to send the chat
-			// via a POST AJAX request:
-
+			/*Using our tzPOST wrapper method to send the chat
+			via a POST AJAX request:*/
 			tzPOST('submitChat',$(this).serialize(),function(r){
 				working = false;
-
 				$('#chatText').val('');
 				$('div.chat-'+tempID).remove();
-
 				params['id'] = r.insertID;
 				chat.addChatLine($.extend({},params));
 			});
@@ -102,8 +94,7 @@ var chat = {
 			return false;
 		});
 
-		// Logging the user out:
-
+		/*Logging the user out:*/
 		$('a.logoutButton').live('click',function(){
 
 			$('#chatTopBar > span').fadeOut(function(){
@@ -115,20 +106,17 @@ var chat = {
 			});
 
 			tzPOST('logout');
-
 			return false;
 		});
 
-		// Checking whether the user is already logged (browser refresh)
-
+		/*Checking whether the user is already logged (browser refresh)*/
 		tzGET('checkLogged',function(r){
 			if(r.logged){
 				chat.login(r.loggedAs.name);
 			}
 		});
 
-		// Self executing timeout functions
-
+		/*Self executing timeout functions*/
 		(function getChatsTimeoutFunction(){
 			chat.getChats(getChatsTimeoutFunction);
 		})();
@@ -139,9 +127,8 @@ var chat = {
 
 	},
 
-	// The login method hides displays the
-	// user's login data and shows the submit form
-
+	/*The login method hides displays the
+	user's login data and shows the submit form*/
 	login : function(name){
 
 		chat.data.name = name;
@@ -154,9 +141,8 @@ var chat = {
 
 	},
 
-	// The render method generates the HTML markup
-	// that is needed by the other methods:
-
+	/*The render method generates the HTML markup
+	that is needed by the other methods:*/
 	render : function(template,params){
 
 		var arr = [];
@@ -181,26 +167,22 @@ var chat = {
 			break;
 		}
 
-		// A single array join is faster than
-		// multiple concatenations
-
+		/*A single array join is faster than
+		multiple concatenations*/
 		return arr.join('');
 
 	},
 
-	// The addChatLine method ads a chat entry to the page
-
+	/*The addChatLine method ads a chat entry to the page*/
 	addChatLine : function(params){
 
-		// All times are displayed in the user's timezone
-
+		/*All times are displayed in the user's timezone*/
 		var d = new Date();
 		if(params.time) {
 
-			// PHP returns the time in UTC (GMT). We use it to feed the date
-			// object and later output it in the user's timezone. JavaScript
-			// internally converts it for us.
-
+			/*PHP returns the time in UTC (GMT). We use it to feed the date
+			object and later output it in the user's timezone. JavaScript
+			internally converts it for us.*/
 			d.setUTCHours(params.time.hours,params.time.minutes);
 		}
 
@@ -215,13 +197,12 @@ var chat = {
 		}
 
 		if(!chat.data.lastID){
-			// If this is the first chat, remove the
-			// paragraph saying there aren't any:
-
+			/*If this is the first chat, remove the
+			paragraph saying there aren't any:*/
 			$('#chatLineHolder p').remove();
 		}
 
-		// If this isn't a temporary chat:
+		/*If this isn't a temporary chat:*/
 		if(params.id.toString().charAt(0) != 't'){
 			var previous = $('#chatLineHolder .chat-'+(+params.id - 1));
 			if(previous.length){
@@ -231,17 +212,15 @@ var chat = {
 		}
 		else chat.data.jspAPI.getContentPane().append(markup);
 
-		// As we added new content, we need to
-		// reinitialise the jScrollPane plugin:
-
+		/*As we added new content, we need to
+		reinitialise the jScrollPane plugin:*/
 		chat.data.jspAPI.reinitialise();
 		chat.data.jspAPI.scrollToBottom(true);
 
 	},
 
-	// This method requests the latest chats
-	// (since lastID), and adds them to the page.
-
+	/*This method requests the latest chats
+	(since lastID), and adds them to the page.*/
 	getChats : function(callback){
 		tzGET('getChats',{lastID: chat.data.lastID},function(r){
 
@@ -254,9 +233,8 @@ var chat = {
 				chat.data.lastID = r.chats[i-1].id;
 			}
 			else{
-				// If no chats were received, increment
-				// the noActivity counter.
-
+				/*If no chats were received, increment
+				the noActivity counter.*/
 				chat.data.noActivity++;
 			}
 
@@ -264,9 +242,8 @@ var chat = {
 				chat.data.jspAPI.getContentPane().html('<p class="noChats">No chats yet</p>');
 			}
 
-			// Setting a timeout for the next request,
-			// depending on the chat activity:
-
+			/*Setting a timeout for the next request,
+			depending on the chat activity:*/
 			var nextRequest = 1000;
 
 			// 2 seconds
@@ -287,11 +264,9 @@ var chat = {
 		});
 	},
 
-	// Requesting a list with all the users.
-
+	/*Requesting a list with all the users.*/
 	getUsers : function(callback){
 		tzGET('getUsers',function(r){
-
 			var users = [];
 
 			for(var i=0; i< r.users.length;i++){
@@ -310,15 +285,12 @@ var chat = {
 			}
 
 			users.push('<p class="count">'+message+'</p>');
-
 			$('#chatUsers').html(users.join(''));
-
 			setTimeout(callback,15000);
 		});
 	},
 
-	// This method displays an error message on the top of the page:
-
+	/*This method displays an error message on the top of the page:*/
 	displayError : function(msg){
 		var elem = $('<div>',{
 			id		: 'chatErrorMessage',
@@ -339,8 +311,7 @@ var chat = {
 	}
 };
 
-// Custom GET & POST wrappers:
-
+/*Custom GET & POST wrappers:*/
 var tzPOST = function(action,data,callback){
 	$.post('php/vahhchat.php?action='+action,data,callback,'json');
 }
@@ -349,8 +320,10 @@ var tzGET = function(action,data,callback){
 	$.get('php/vahhchat.php?action='+action,data,callback,'json');
 }
 
-// A custom jQuery method for placeholder text:
-
+/*A custom jQuery method for placeholder text:
+that will show the user that their message has been
+sent, and later deleted and replace when the
+function is exectued and the data is stored*/
 $.fn.defaultText = function(value){
 
 	var element = this.eq(0);

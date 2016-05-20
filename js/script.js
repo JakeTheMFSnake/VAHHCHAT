@@ -1,3 +1,4 @@
+(function(window,$) {
 $(document).ready(function(){
 
 	// Run the init method on document ready:
@@ -45,7 +46,7 @@ var chat = {
 			// Using our tzPOST wrapper function
 			// (defined in the bottom):
 
-			$.tzPOST('login',$(this).serialize(),function(r){
+			tzPOST('login',$(this).serialize(),function(r){
 				working = false;
 
 				if(r.error){
@@ -88,7 +89,7 @@ var chat = {
 			// Using our tzPOST wrapper method to send the chat
 			// via a POST AJAX request:
 
-			$.tzPOST('submitChat',$(this).serialize(),function(r){
+			tzPOST('submitChat',$(this).serialize(),function(r){
 				working = false;
 
 				$('#chatText').val('');
@@ -113,14 +114,14 @@ var chat = {
 				$('#loginForm').fadeIn();
 			});
 
-			$.tzPOST('logout');
+			tzPOST('logout');
 
 			return false;
 		});
 
 		// Checking whether the user is already logged (browser refresh)
 
-		$.tzGET('checkLogged',function(r){
+		tzGET('checkLogged',function(r){
 			if(r.logged){
 				chat.login(r.loggedAs.name);
 			}
@@ -242,7 +243,7 @@ var chat = {
 	// (since lastID), and adds them to the page.
 
 	getChats : function(callback){
-		$.tzGET('getChats',{lastID: chat.data.lastID},function(r){
+		tzGET('getChats',{lastID: chat.data.lastID},function(r){
 
 			for(var i=0;i<r.chats.length;i++){
 				chat.addChatLine(r.chats[i]);
@@ -289,7 +290,7 @@ var chat = {
 	// Requesting a list with all the users.
 
 	getUsers : function(callback){
-		$.tzGET('getUsers',function(r){
+		tzGET('getUsers',function(r){
 
 			var users = [];
 
@@ -340,11 +341,11 @@ var chat = {
 
 // Custom GET & POST wrappers:
 
-$.tzPOST = function(action,data,callback){
+var tzPOST = function(action,data,callback){
 	$.post('php/vahhchat.php?action='+action,data,callback,'json');
 }
 
-$.tzGET = function(action,data,callback){
+var tzGET = function(action,data,callback){
 	$.get('php/vahhchat.php?action='+action,data,callback,'json');
 }
 
@@ -367,3 +368,4 @@ $.fn.defaultText = function(value){
 
 	return element.blur();
 }
+})(window,$);
